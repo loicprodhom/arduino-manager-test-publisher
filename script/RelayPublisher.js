@@ -6,7 +6,7 @@ let client;
 
 module.exports = {
   init: () => {
-    console.log("Publisher startup succesful");
+    console.log("RelayPublisher startup succesful");
   },
   connect: () => {
     console.log("Connecting to broker...");
@@ -17,10 +17,19 @@ module.exports = {
   },
   publish: () => {
     console.log("Publishing INFO...");
-    client.publish(
-      "boxes",
-      `{"id":"1","IP":"192.168.0.91","mac":"dead.aaaa.feed","type":"relay","relay1":"ON","relay2":"ON"}`
-    );
+    let data = {
+      id: 1,
+      IP: "192.168.0.91",
+      mac: "dead.aaaa.feed",
+      type: "Relay",
+      data: {
+        relay1Status: "ON",
+        relay2Status: "ON",
+        relay1: "3.5A",
+        relay2: "2.5A",
+      },
+    };
+    client.publish("boxes", JSON.stringify(data));
   },
   subscribe: () => {
     console.log("Subscribing to self topic...");

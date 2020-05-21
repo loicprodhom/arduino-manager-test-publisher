@@ -19,15 +19,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-//Activating the MQTT Browserified bundle for our express app
+//Activating the MQTT Browserified bundle for the Express app
 app.use(express.static(path.dirname(require.resolve("mosca")) + "/public"));
 
-//Starting the publisher
-let Publisher = require("./script/Publisher.js");
-Publisher.init();
-Publisher.connect();
-Publisher.publish();
-Publisher.subscribe();
+//Starting the publishers
+let RelayPublisher = require("./script/RelayPublisher.js");
+RelayPublisher.init();
+RelayPublisher.connect();
+RelayPublisher.publish();
+RelayPublisher.subscribe();
+
+let LCDPublisher = require("./script/LCDPublisher.js");
+LCDPublisher.init();
+LCDPublisher.connect();
+LCDPublisher.publish();
+LCDPublisher.subscribe();
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
