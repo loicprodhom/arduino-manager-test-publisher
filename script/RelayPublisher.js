@@ -9,14 +9,14 @@ module.exports = {
     console.log("RelayPublisher startup succesful");
   },
   connect: () => {
-    console.log("Connecting to broker...");
+    console.log("Arduino1: Connecting to broker...");
     client = mqtt.connect("http://localhost:1883", { clientId: "Arduino1" });
     client.on("message", (topic, message) => {
       console.log(`Arduino1: new message on topic ${topic}: ${message}`);
     });
   },
   publish: () => {
-    console.log("Publishing INFO...");
+    console.log("Arduino1: Publishing INFO...");
     let data = {
       id: 1,
       IP: "192.168.0.91",
@@ -32,7 +32,7 @@ module.exports = {
     client.publish("boxes", JSON.stringify(data));
   },
   subscribe: () => {
-    console.log("Subscribing to self topic...");
+    console.log("Arduino1: Subscribing to self topic...");
     client.subscribe("boxes/1");
   },
 };
