@@ -22,12 +22,7 @@ module.exports = {
       IP: "192.168.0.92",
       mac: "dead.bbbb.feed",
       type: "LCD",
-      data: {
-        line1: "",
-        line2: "Classroom 305",
-        line3: "Ongoing Exam",
-        line4: "",
-      },
+      data: ["", "Classroom 305", "Ongoing Exam", ""],
     };
     client.publish("boxes", JSON.stringify(data));
   },
